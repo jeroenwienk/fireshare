@@ -4,6 +4,6 @@
 # PROJECT
 node_modules/
 .env
-
+build/
 
 

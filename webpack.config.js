@@ -7,14 +7,23 @@ dotenv.config();
 
 const config = {
   mode: process.env.NODE_ENV,
+  devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : false,
   target: 'web',
   entry: {
     bundle: [path.resolve(__dirname, 'src/index.js')]
   },
   output: {
-    filename: '[name].js',
+    filename: 'static/js/[name].[hash:8].js',
+    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     path: path.resolve(__dirname, 'build'),
     publicPath: '/'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: true,
+    },
+    runtimeChunk: true,
   },
   devServer: {
     publicPath: '/',
@@ -27,15 +36,49 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
-        exclude: /(node_modules)/,
-        use: [
+
+        oneOf: [
           {
-            loader: 'babel-loader',
-            options: {}
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 10000,
+                  name: 'static/media/[name].[hash:8].[ext]'
+                }
+              }
+            ]
+          },
+          {
+            test: /\.(js)$/,
+            exclude: /(node_modules)/,
+            use: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  cacheDirectory: true
+                }
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+          },
+          {
+            loader: 'file-loader',
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
           }
-        ]
-      }
+        ],
+
+
+      },
+
+
     ]
   },
   plugins: [
@@ -49,10 +92,22 @@ const config = {
       'FB_AUTH_DOMAIN',
       'FB_PROJECT_ID',
       'FB_STORAGE_BUCKET'
-    ]),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    ])
   ]
 };
+
+switch (process.env.NODE_ENV) {
+  case 'development':
+    config.plugins = config.plugins.concat([
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin()
+    ]);
+    break;
+  case 'production':
+    config.plugins = config.plugins.concat([]);
+    break;
+  default:
+    config.plugins = config.plugins.concat([]);
+}
 
 export default config;
