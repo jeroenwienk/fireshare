@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Loading extends Component {
+  static propTypes = {
+    error: PropTypes.bool,
+    retry: PropTypes.func,
+    pastDelay: PropTypes.bool
+  };
+
   render() {
     const { error, retry, pastDelay } = this.props;
 
@@ -10,11 +17,13 @@ class Loading extends Component {
           Error! <button onClick={retry}>Retry</button>
         </div>
       );
-    } else if (pastDelay) {
-      return <div>Loading...</div>;
-    } else {
-      return null;
     }
+
+    if (pastDelay) {
+      return <div>Loading...</div>;
+    }
+
+    return null;
   }
 }
 

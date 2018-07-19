@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loading /> it renders null with nothing 1`] = `null`;
+
+exports[`<Loading /> it renders with error 1`] = `
+<div>
+  Error! 
+  <button>
+    Retry
+  </button>
+</div>
+`;
+
+exports[`<Loading /> it renders with pastDelay 1`] = `
+<div>
+  Loading...
+</div>
+`;

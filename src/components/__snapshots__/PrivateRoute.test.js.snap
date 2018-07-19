@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PrivateRoute /> it renders redirect when not authenticated 1`] = `
+<div>
+  <div>
+    Unauthenticated 
+    /login
+  </div>
+</div>
+`;
+
+exports[`<PrivateRoute /> it renders route when authenticated 1`] = `
+<div>
+  <div>
+    Authenticated
+  </div>
+</div>
+`;

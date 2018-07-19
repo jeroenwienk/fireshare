@@ -8,7 +8,30 @@
     "prebuild": "rimraf ./build/*",
     "build": "cross-env NODE_ENV=production babel-node ./node_modules/webpack/bin/webpack --config ./webpack.config.js",
     "format": "prettier --single-quote --write '{src,webpack,internals,__{tests}__}/**/*.js'",
-    "lint": "eslint '{src,webpack,internals,__{tests,mocks}__}/**/*.js'"
+    "lint": "eslint '{src,webpack,internals,__{tests,mocks}__}/**/*.js'",
+    "test": "cross-env NODE_ENV=test jest"
+  },
+  "lint-staged": {
+    "{src,webpack,internals,__{tests,mocks}__}/**/*.js": [
+      "eslint",
+      "cross-env NODE_ENV=test jest --findRelatedTests --passWithNoTests"
+    ]
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "<rootDir>/src/common"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/test/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/internals/test/styleMock.js"
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/build/"
+    ],
+    "setupFiles": [
+      "<rootDir>/internals/test/setup.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -26,6 +49,7 @@
     "@firebase/firestore": "^0.5.6",
     "@material-ui/core": "^1.4.0",
     "@material-ui/icons": "^1.1.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-loadable": "^5.4.0",
@@ -45,23 +69,29 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.54",
     "@babel/preset-env": "^7.0.0-beta.54",
     "@babel/preset-react": "^7.0.0-beta.54",
+    "babel-core": "^7.0.0-0",
     "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.0",
     "babel-loader": "^8.0.0-beta",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "dotenv": "^6.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^5.1.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.4.1",
     "prettier": "^1.13.7",
+    "react-test-renderer": "^16.4.1",
     "rimraf": "^2.6.2",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.16.1",
-    "webpack-cli": "^3.0.8",
+    "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.4"
   }
 }
