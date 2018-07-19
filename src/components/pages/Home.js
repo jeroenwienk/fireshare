@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 class Home extends Component {
+
+  componentDidMount() {
+    this.state = 1;
+  }
+
+
   render() {
     return <div>Home</div>;
   }

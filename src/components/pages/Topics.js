@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Route from 'react-router-dom/Route';
 import Link from 'react-router-dom/Link';
 
-import Topic from './Topic';
+import { LoadableTopic } from '../../loadables';
 
 class Topics extends Component {
   render() {
@@ -24,7 +23,7 @@ class Topics extends Component {
           </li>
         </ul>
 
-        <Route path={`${match.path}/:topicId`} component={Topic} />
+        <Route path={`${match.path}/:topicId`} component={LoadableTopic} />
         <Route
           exact
           path={match.path}

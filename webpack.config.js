@@ -21,9 +21,9 @@ const config = {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: true,
+      name: true
     },
-    runtimeChunk: true,
+    runtimeChunk: true
   },
   devServer: {
     publicPath: '/',
@@ -36,7 +36,15 @@ const config = {
   module: {
     rules: [
       {
-
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          // eslint options (if necessary)
+        }
+      },
+      {
         oneOf: [
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -70,15 +78,11 @@ const config = {
             loader: 'file-loader',
             exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
             options: {
-              name: 'static/media/[name].[hash:8].[ext]',
-            },
+              name: 'static/media/[name].[hash:8].[ext]'
+            }
           }
-        ],
-
-
-      },
-
-
+        ]
+      }
     ]
   },
   plugins: [

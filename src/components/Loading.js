@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 class Loading extends Component {
   render() {
-    return <div>Loading...</div>;
+    const { error, retry, pastDelay } = this.props;
+
+    if (error) {
+      return (
+        <div>
+          Error! <button onClick={retry}>Retry</button>
+        </div>
+      );
+    } else if (pastDelay) {
+      return <div>Loading...</div>;
+    } else {
+      return null;
+    }
   }
 }
 
