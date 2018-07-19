@@ -2,6 +2,17 @@
   "name": "fireshare",
   "version": "0.0.1",
   "description": "Web application for fire department twente.",
+  "browserslist": "last 2 versions, ie 10",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeroenwienk/fireshare.git"
+  },
+  "author": "Jeroen Wienk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeroenwienk/fireshare/issues"
+  },
+  "homepage": "https://github.com/jeroenwienk/fireshare#readme",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --watch --config ./webpack.config.js",
@@ -34,16 +45,6 @@
       "<rootDir>/internals/test/setup.js"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jeroenwienk/fireshare.git"
-  },
-  "author": "Jeroen Wienk",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jeroenwienk/fireshare/issues"
-  },
-  "homepage": "https://github.com/jeroenwienk/fireshare#readme",
   "dependencies": {
     "@firebase/app": "^0.3.3",
     "@firebase/auth": "^0.7.0",
@@ -68,6 +69,7 @@
     "@babel/node": "^7.0.0-beta.54",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.54",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.54",
+    "@babel/polyfill": "^7.0.0-beta.54",
     "@babel/preset-env": "^7.0.0-beta.54",
     "@babel/preset-react": "^7.0.0-beta.54",
     "babel-core": "^7.0.0-0",

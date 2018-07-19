@@ -63,7 +63,26 @@ const config = {
               {
                 loader: 'babel-loader',
                 options: {
-                  cacheDirectory: true
+                  babelrc: false,
+                  cacheDirectory: true,
+                  presets: [
+                    [
+                      '@babel/preset-env',
+                      {
+                        targets: {
+                          node: 'current'
+                        },
+                        modules: false,
+                        useBuiltIns: 'usage',
+                        ignoreBrowserslistConfig: false
+                      }
+                    ],
+                    ['@babel/preset-react']
+                  ],
+                  plugins: [
+                    ['@babel/plugin-proposal-class-properties'],
+                    ['@babel/plugin-syntax-dynamic-import']
+                  ]
                 }
               }
             ]
